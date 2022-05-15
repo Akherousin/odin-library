@@ -9,5 +9,45 @@
 
     <title>Library</title>
   </head>
-  <body></body>
+  <body>
+    <button class="new-book-btn">New book</button>
+    <div class="bg-modal closed-modal">
+      <form class="form">
+        <button type="button" class="close-btn">X</button>
+        <ul class="form-inputs">
+          <li class="form-input">
+            <label class="form-label" for="inputTitle">Book Title</label>
+            <input type="text" id="inputTitle" name="inputTitle" required />
+          </li>
+          <li class="form-input">
+            <label class="form-label" for="inputAuthor">Book Author</label>
+            <input type="text" id="inputAuthor" name="inputAuthor" required />
+          </li>
+          <li class="form-input">
+            <label class="form-label" for="inputPages">Number of pages</label>
+            <input type="number" id="inputPages" name="inputPages" required />
+          </li>
+          <li class="form-input">
+            <label class="form-label" for="bookRead">Read</label>
+            <input
+              type="radio"
+              id="bookRead"
+              name="inputRead"
+              value="true"
+              required
+            />
+            <label class="form-label" for="bookNotRead">Not Read</label>
+            <input
+              type="radio"
+              id="bookNotRead"
+              name="inputRead"
+              value="false"
+              required
+            />
+          </li>
+        </ul>
+        <button class="form-btn">Add new book</button>
+      </form>
+    </div>
+  </body>
 </html>

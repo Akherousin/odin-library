@@ -1,3 +1,7 @@
+const body = document.querySelector("body");
+const closeFormBtn = document.querySelector(".close-btn");
+const newBookBtn = document.querySelector(".new-book-btn");
+
 let myLibrary = [
   { title: "hobbit", author: "tolkin", pages: 300, read: true },
   { title: "harry potter", author: "rowling", pages: 200, read: true },
@@ -12,7 +16,6 @@ function Book(title, author, pages, read) {
 }
 
 function displayBooks() {
-  const body = document.querySelector("body");
   for (let i = 0; i < myLibrary.length; i++) {
     const bookCard = document.createElement("div");
     bookCard.classList.add("card");
@@ -39,6 +42,19 @@ function displayBooks() {
     body.appendChild(bookCard);
   }
 }
+
+function hideModalWindow() {
+  const modalWindow = document.querySelector(".bg-modal");
+  modalWindow.classList.add("closed-modal");
+}
+
+function showModalWindow() {
+  const modalWindow = document.querySelector(".bg-modal");
+  modalWindow.classList.remove("closed-modal");
+}
+
+closeFormBtn.addEventListener("click", hideModalWindow);
+newBookBtn.addEventListener("click", showModalWindow);
 
 displayBooks();
 
