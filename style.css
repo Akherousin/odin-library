@@ -1,0 +1,17 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: antiquewhite;
+  flex-grow: 0;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  border-radius: 4px;
+}
