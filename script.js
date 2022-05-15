@@ -16,9 +16,10 @@ function Book(title, author, pages, read) {
     (this.read = read);
 }
 
-function displayBook(book) {
+function displayBook(book, index) {
   const bookCard = document.createElement("div");
   bookCard.classList.add("card");
+  bookCard.dataset.indexCard = index;
   const title = document.createElement("h2");
   title.classList.add("book-title");
   title.textContent = book.title;
@@ -39,12 +40,25 @@ function displayBook(book) {
   read.classList.add("book-read");
   bookCard.appendChild(read);
 
+  const removeBtn = document.createElement("button");
+  removeBtn.textContent = "X";
+  removeBtn.classList.add("remove-btn");
+  removeBtn.dataset.index = index;
+  bookCard.appendChild(removeBtn);
+
   body.appendChild(bookCard);
+}
+
+function resetDataIndicis() {
+  const cards = document.querySelectorAll(".card");
+  const btns = document.querySelectorAll(".remove-btn");
+  cards.forEach((item, index) => (item.dataset.indexCard = index));
+  btns.forEach((item, index) => (item.dataset.index = index));
 }
 
 function displayBooks() {
   for (let i = 0; i < myLibrary.length; i++) {
-    displayBook(myLibrary[i]);
+    displayBook(myLibrary[i], i);
   }
 }
 
@@ -70,11 +84,26 @@ function addBookToLibrary(e) {
   console.log(bookTitle, bookAuthor, bookPages, bookRead);
 
   const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
-  displayBook(newBook);
+  myLibrary.push(newBook);
+  displayBook(newBook, myLibrary.length - 1);
+}
+
+function removeBook(e) {
+  if (!e.target.classList.contains("remove-btn")) return;
+
+  const toBeRemovedIndex = +e.target.dataset.index;
+  const toBeRemovedCard = document.querySelector(
+    `[data-index-card='${toBeRemovedIndex}']`
+  );
+
+  myLibrary.splice(toBeRemovedIndex, 1);
+  body.removeChild(toBeRemovedCard);
+  resetDataIndicis();
 }
 
 closeFormBtn.addEventListener("click", hideModalWindow);
 newBookBtn.addEventListener("click", showModalWindow);
 form.addEventListener("submit", addBookToLibrary);
+document.addEventListener("click", removeBook);
 
 displayBooks();
