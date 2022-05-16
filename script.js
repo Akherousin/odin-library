@@ -36,8 +36,9 @@ function displayBook(book, index) {
   bookCard.appendChild(pages);
 
   const read = document.createElement("p");
-  read.textContent = book.read ? "read" : "to read";
+  read.textContent = book.read ? "read" : "not read";
   read.classList.add("book-read");
+  read.dataset.indexRead = index;
   bookCard.appendChild(read);
 
   const removeBtn = document.createElement("button");
@@ -101,9 +102,20 @@ function removeBook(e) {
   resetDataIndicis();
 }
 
+function changeReadStatus(e) {
+  if (!e.target.classList.contains("book-read")) return;
+
+  const toBeChangedIndex = +e.target.dataset.indexRead;
+
+  myLibrary[toBeChangedIndex].read = !myLibrary[toBeChangedIndex].read;
+  e.target.textContent = myLibrary[toBeChangedIndex].read ? "read" : "not read";
+  console.table(myLibrary);
+}
+
 closeFormBtn.addEventListener("click", hideModalWindow);
 newBookBtn.addEventListener("click", showModalWindow);
 form.addEventListener("submit", addBookToLibrary);
 document.addEventListener("click", removeBook);
+document.addEventListener("click", changeReadStatus);
 
 displayBooks();
