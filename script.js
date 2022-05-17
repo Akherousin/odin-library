@@ -9,11 +9,13 @@ let myLibrary = [
   { title: "book3", author: "random", pages: 200, read: false },
 ];
 
-function Book(title, author, pages, read) {
-  (this.title = title),
-    (this.author = author),
-    (this.pages = pages),
-    (this.read = read);
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 }
 
 function displayBook(book, index) {
